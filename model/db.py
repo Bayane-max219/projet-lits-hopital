@@ -13,7 +13,7 @@ class BaseDeDonnees:
     def __init__(self, config=CONFIG):
         cfg = dict(config)
         nom = cfg.pop("database")
-        self.cnx = mysql.connector.connect(**cfg, autocommit=True)
+        self.cnx = mysql.connector.connect(**cfg, autocommit=True, use_pure=True)  # Python pur : évite un plantage de l extension C sous Windows
         cur = self.cnx.cursor()
         cur.execute(f"CREATE DATABASE IF NOT EXISTS `{nom}` CHARACTER SET utf8mb4")
         cur.close()
